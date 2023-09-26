@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Validator Session Lesson</title>
+<link rel="stylesheet" href="/css/step5style.css">
+</head>
+<body>
+	<div id="contents">
+		<div id="header"></div>
+		<!-- header -->
+		<div class="content">
+			<form th:action="@{/step5/submit}" method="post"
+				th:object="${step5SessionForm}">
+				<div id="header-fix">
+					<input type="submit" value="submit foward" name="foward"> <input
+						type="submit" value="submit redirect" name="redirect"> <input
+						type="submit" value="session clear" name="sessionComplete">
+				</div>
+				<table>
+					<!-- text single line -->
+					<tr>
+						<th><span>Textを入力しsubmitボタンを押下した際に、入力チェックを行い<br>
+								次のエラーメッセージを出力させてください。
+						</span>
+							<ul>
+								<li>5文字以上、10文字以下での入力してください。</li>
+							</ul></th>
+					</tr>
+					<tr>
+						<td><input type="text" th:field="${step5Form.inputText1}">
+							<p th:if="${#fields.hasErrors('${step5Form.inputText1}')}"
+								th:errors="${step5Form.inputText1}" class="error"></p></td>
+					</tr>
+					<!-- text single line -->
+					<tr>
+						<th><span>Textを入力しsubmitボタンを押下した際に、入力チェックを行い<br>
+								次のエラーメッセージを出力させてください。
+						</span>
+							<ul>
+								<li>入力必須項目です。</li>
+								<li>5文字以上、10文字以下での入力してください。</li>
+							</ul></th>
+					</tr>
+					<tr>
+						<td><input type="text" name="inputText2"
+							th:field="${step5Form.inputText2}">
+							<p th:if="${#fields.hasErrors('${step5Form.inputText2}')}"
+								th:errors="${step5Form.inputText2}" class="error"></p></td>
+					</tr>
+					<!-- text single line -->
+					<tr>
+						<th><span>Textを入力しsubmitボタンを押下した際に、入力チェックを行い<br>
+								次のエラーメッセージを出力させてください。
+						</span>
+							<ul>
+								<li>入力必須項目です。</li>
+								<li>電子メールアドレスとして正しい形式にしてください</li>
+							</ul></th>
+					</tr>
+					<tr>
+						<td><input type="text" name="inputText3"
+							th:field="${step5Form.inputText3}">
+							<p th:if="${#fields.hasErrors('${step5Form.inputText3}')}"
+								th:errors="${step5Form.inputText3}" class="error"></p></td>
+					</tr>
+					<!-- text single line -->
+					<tr>
+						<th><span>Textを入力しsubmitボタンを押下した際に、入力チェックを行い<br>
+								次のエラーメッセージを出力させてください。
+						</span>
+							<ul>
+								<li>入力必須項目です。</li>
+								<li>正規表現 "[0-9]" にマッチさせてください</li>
+							</ul></th>
+					</tr>
+					<tr>
+						<td><input type="text" name="inputText4"
+							th:field="${step5Form.inputText4}">
+							<p th:if="${#fields.hasErrors('${step5Form.inputText4}')}"
+								th:errors="${step5Form.inputText4}" class="error"></p></td>
+					</tr>
+					<!-- text single line -->
+					<tr>
+						<th><span>Textを入力しsubmitボタンを押下した際に、入力チェックを行い<br>
+								次のエラーメッセージを出力させてください。
+						</span>
+							<ul>
+								<li>入力必須項目です。</li>
+								<li>070,080,090で始まる携帯電話番号を入力してください</li>
+							</ul></th>
+					</tr>
+					<tr>
+						<td>
+							<p>携帯電話番号を入力してください。例:090-1234-5678</p> <input type="text"
+							name="inputText5" th:field="${step5Form.inputText5}">
+							<p th:if="${#fields.hasErrors('${step5Form.inputText5}')}"
+								th:errors="${step5Form.inputText5}" class="error"></p>
+						</td>
+					</tr>
+					<!-- text single line -->
+					<tr>
+						<th><span>Textを入力しsubmitボタンを押下した際に、入力チェックを行い<br>
+								次のエラーメッセージを出力させてください。
+						</span>
+							<ul>
+								<li>入力必須項目です。</li>
+								<li>4文字以上8文字以内で入力してください</li>
+								<li>半角英数字を入力してください</li>
+							</ul></th>
+					</tr>
+					<tr>
+						<td>
+							<p>IDを入力してください。※半角英数字 4文字以上8文字以内</p> <input type="text"
+							name="inputText6" th:field="${step5Form.inputText6}">
+							<p th:if="${#fields.hasErrors('${step5Form.inputText6}')}"
+								th:errors="${step5Form.inputText6}" class="error"></p>
+						</td>
+					</tr>
+					<tr>
+						<th><span>Textを入力しsubmitボタンを押下した際に、入力チェックを行い<br>
+								次のエラーメッセージを出力させてください。
+						</span>
+							<ul>
+								<li>入力必須項目です。</li>
+								<li>5文字以上10文字以内で入力してください</li>
+								<li>半角英数字を入力してください</li>
+							</ul></th>
+					</tr>
+					<tr>
+						<td>
+							<p>パスワードを入力してください。※半角英数字 4文字以上8文字以内</p>
+							<p th:if="${#fields.hasErrors('${step5Form.errMsg1}')}"
+								th:errors="${step5Form.errMsg1}" class="error"></p> <input
+							type="password" name="inputText7"
+							th:field="${step5Form.inputText7}">
+							<p th:if="${#fields.hasErrors('${step5Form.inputText7}')}"
+								th:errors="${step5Form.inputText7}" class="error"></p>
+							<p>確認用</p> <input type="password" name="inputText8"
+							th:field="${step5Form.inputText8}">
+							<p th:if="${#fields.hasErrors('${step5Form.inputText8}')}"
+								th:errors="${step5Form.inputText8}" class="error"></p>
+						</td>
+					</tr>
+					<!-- text single line -->
+					<tr>
+						<th><span>数値を入力しsubmitボタンを押下した際に、入力チェックを行い<br>
+								次のエラーメッセージを出力させてください。
+						</span>
+							<ul>
+								<li>入力必須項目です。</li>
+								<li>10以上20以内で入力してください</li>
+							</ul></th>
+					</tr>
+					<tr>
+						<td>
+							<p>値を入力してください。※10以上20以内</p>
+							<input type="number" name="inputNo1" th:field="${step5Form.inputNo1}">
+							<p th:if="${#fields.hasErrors('${step5Form.inputNo1}')}"
+								th:errors="${step5Form.inputNo1}" class="error"></p>
+						</td>
+					</tr>
+					<tr>
+						<th>参考URL</th>
+					</tr>
+					<tr>
+						<td>
+							<ul>
+								<li><a
+									href="https://www.tuyano.com/index3?id=6209570301018112&page=5">
+										Bean Validatorによるバリデーション (5/6)</a></li>
+								<li><a
+									href="https://terasolunaorg.github.io/guideline/1.0.6.RELEASE/ja/
+                                        ArchitectureInDetail/Validation.html">
+										5.5. 入力チェック</a></li>
+								<li><a
+									href="https://qiita.com/konweb/items/97cccb28973aefe4b0c6">
+										正規表現いろいろ</a></li>
+								<li><a href="https://murashun.jp/blog/20190215-01.html">
+										基本的な正規表現一覧</a></li>
+							</ul>
+						</td>
+					</tr>
+
+
+				</table>
+
+			</form>
+		</div>
+		<!-- content -->
+		<div id="footer"></div>
+		<!-- footer -->
+	</div>
+	<!-- contents -->
+</body>
+</html>

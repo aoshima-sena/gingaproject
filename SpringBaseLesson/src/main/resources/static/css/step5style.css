@@ -1,0 +1,80 @@
+@charset "UTF-8";
+
+body {
+	font-family: 'メイリオ', 'Meiryo', sans-serif;
+}
+
+div#header-fix {
+	text-align:left;
+    position: fixed;            /* ヘッダーの固定 */
+    top: 0px;                   /* 位置(上0px) */
+    width: 80%;                /* 横幅100%　*/
+    height: 100px;              /* 縦幅140px */
+	margin-left: auto;
+	margin-right: auto;
+
+}
+
+#contents {
+	width: 80%;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+table {
+	text-align:left;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 160px;
+}
+
+table, td, th {
+	border-collapse: collapse;
+	border: 1px solid #333;
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-bottom: 10px;
+}
+
+th {
+	background-color: #c9c9c9;
+	color: white;
+}
+
+.error{
+	color: red;
+}
+
+
+input {
+	width: 95%;
+}
+
+input[type="radio"] {
+	width: auto;
+}
+
+input[type="checkbox"] {
+	width: auto;
+}
+
+input[type="submit"] {
+	background-color: #7f7f7f;
+	font-weight: bold;
+	font-size: 20px;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	border-radius:20px;
+	border: none;
+	outline: none;
+	width: 200px;
+	margin: 30px;
+	color: white;
+
+}
+
+input[type="submit"]:hover {
+	background-color: #ff6060;
+}

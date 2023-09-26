@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" media="all"
+	th:href="@{/css/main.css}">
+<link rel="stylesheet" type="text/css" media="all"
+	th:href="@{/css/add.css}">
+<link rel="stylesheet" type="text/css" media="all"
+	th:href="@{/css/button.css}">
+
+<!-- jQueryの読み込み -->
+<script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+
+<!-- jQueryUiの読み込み -->
+<script th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<link rel="stylesheet"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+
+<title>施設予約登録</title>
+</head>
+<body>
+	<div th:replace="util/fragments::header_block(|予約情報管理|)"></div>
+	<div id="container">
+		<div align="center">
+			<form th:action="@{/testfacilityreservation/confirm}" method="POST"
+				th:object="${facilityReservationAddForm}">
+
+				<div class="test-message1">
+					<div class="detailPositionTest">
+						<!-- 年月日の表示 -->
+						<div
+							th:text="|・${facilityReservationAddForm.calendarMonthForm.startYear}年${facilityReservationAddForm.calendarMonthForm.startMonth}月${facilityReservationAddForm.calendarMonthForm.startDate}日|"></div>
+						<input type="hidden" id="year"
+							th:value="${facilityReservationAddForm.calendarMonthForm.startYear}"
+							th:field="${facilityReservationAddForm.calendarMonthForm.startYear}">
+						<input type="hidden" id="month"
+							th:value="${facilityReservationAddForm.calendarMonthForm.startMonth}"
+							th:field="${facilityReservationAddForm.calendarMonthForm.startMonth}">
+						<input type="hidden" id="date"
+							th:value="${facilityReservationAddForm.calendarMonthForm.startDate}"
+							th:field="${facilityReservationAddForm.calendarMonthForm.startDate}">
+						<!-- 会議室名の表示 -->
+						<th:block
+							th:if="${facilityReservationAddForm.facilityReservationFormList != null}">
+							<div
+								th:text="|・${facilityReservationAddForm.facilityReservationFormList[0].facilityForm.name}|"></div>
+							<input type="hidden"
+								th:value="${facilityReservationAddForm.facilityReservationFormList[0].facilityForm.name}"
+								th:field="${facilityReservationAddForm.facilityReservationFormList[0].facilityForm.name}">
+							<input type="hidden"
+								th:value="${facilityReservationAddForm.facilityReservationFormList[0].facilityForm.facilityId}"
+								th:field="${facilityReservationAddForm.facilityReservationFormList[0].facilityForm.facilityId}">
+						</th:block>
+						<th:block
+							th:if="${facilityReservationAddForm.facilityReservationFormList ==null}">
+							<div
+								th:text="|・${facilityReservationAddForm.facilityReservationForm.facilityForm.name}|"></div>
+							<input type="hidden"
+								th:value="${facilityReservationAddForm.facilityReservationForm.facilityForm.name}"
+								th:field="${facilityReservationAddForm.facilityReservationForm.facilityForm.name}">
+							<input type="hidden"
+								th:value="${facilityReservationAddForm.facilityReservationForm.facilityForm.facilityId}"
+								th:field="${facilityReservationAddForm.facilityReservationForm.facilityForm.facilityId}">
+						</th:block>
+					</div>
+					<th:block
+						th:if="${facilityReservationAddForm.facilityReservationFormList !=null}">
+						<div class="list">
+							<ul class="detailTest">
+								<th:block
+									th:each="facilityReservationFormList :${facilityReservationAddForm.facilityReservationFormList}">
+									<th:block
+										th:if="${facilityReservationFormList.startTime !=null}">
+										<li
+											th:text="|${facilityReservationFormList.calendarMonthForm.startTime}~${facilityReservationFormList.calendarMonthForm.endTime}|"></li>
+										<input type="hidden" id="currentStartTime"
+											th:value="${facilityReservationFormList.calendarMonthForm.startTime}">
+										<input type="hidden"
+											th:value="${facilityReservationFormList.calendarMonthForm.endTime}">
+									</th:block>
+								</th:block>
+							</ul>
+						</div>
+					</th:block>
+					<input type="hidden" id="facilityId"
+						th:value="${facilityReservationAddForm.facilityReservationFormList[0].facilityForm.facilityId}">
+				</div>
+				<div class="system-msg" id="error"></div>
+				<div class="conplecation-message">
+					<!-- nameとth:fieldは一緒らしい -->
+					<select class="cp_selecttab" id="startHour"
+						th:field="${facilityReservationAddForm.startHour}">
+
+					</select> <select class="cp_selecttab" name="startMin" id="startMin">
+
+					</select>
+				</div>
+				<div class="complecation-message">
+					<select class="cp_selecttab" name="endHour" id="endHour">
+
+					</select> <select class="cp_selecttab" name="endMin" id="endMin">
+
+					</select>
+				</div>
+				<div class="bottom" align="center">
+
+					<button class="btn-animation-add" type="submit" id="confirm"
+						name="add">
+						<span>登録</span>
+					</button>
+					<a class="btn-animation-menu" th:attr="onClick='history.back()'"><span>戻る</span></a>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<!-- container -->
+	<div th:replace="util/fragments::footer_block()"></div>
+	<!-- jsファイルの読み込み -->
+	<script type="text/javascript"
+		th:src="@{/js/test/testfacilityReservationAdd.js}"></script>
+
+
+</body>
+</html>

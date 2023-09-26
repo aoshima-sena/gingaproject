@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" media="all"
+	th:href="@{/css/main.css}">
+<link rel="stylesheet" type="text/css" media="all"
+	th:href="@{/css/button.css}">
+<link rel="stylesheet" type="text/css" media="all"
+	th:href="@{/css/list.css}">
+<link rel="stylesheet" type="text/css" media="all"
+	th:href="@{/css/calendar/calendar.css}">
+
+<!--  <link rel="stylesheet" type="text/css" media="all"
+	href="../css/calendar/calendar.css"> -->
+<!-- jQueryの読み込み -->
+<script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+
+<!-- jQueryUiの読み込み -->
+<script th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<link rel="stylesheet"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+
+<title>予約状況詳細画面</title>
+</head>
+<body>
+
+	<div th:replace="util/fragments::header_block(|予約状況詳細画面	|)"></div>
+
+	<div id="container">
+
+		<div class="calendar-header" align="center">
+			<th:block th:if="${calendarForm.facilityReservationFormList != null}">
+				<input id="facilityId" type="hidden"
+					th:value="${calendarForm.facilityReservationFormList[0].facilityForm.facilityId}">
+			</th:block>
+			<th:block th:if="${calendarForm.facilityReservationFormList == null}">
+				<input id="facilityId" type="hidden"
+					th:value="${calendarForm.facilityReservationForm.facilityForm.facilityId}">
+			</th:block>
+			<div class="system-msg2"
+				th:object="${calendarForm.facilityReservationFormList}">
+				<th:block
+					th:if="${calendarForm.facilityReservationFormList != null}">
+					<div
+						th:text="|施設名:${calendarForm.facilityReservationFormList[0].facilityForm.name}|"></div>
+				</th:block>
+				<th:block
+					th:if="${calendarForm.facilityReservationFormList == null}">
+					<div
+						th:text="|施設名:${calendarForm.facilityReservationForm.facilityForm.name}|"></div>
+				</th:block>
+			</div>
+
+
+
+			<!-- flexでselectボックスが横向きに並ぶ -->
+			<div class="flex" align="center">
+
+				<div class="cp_ipselect cp_sl01">
+					<select id="selectYear" class="year" name="yearJump">
+
+
+
+					</select>
+
+				</div>
+
+				<div class="cp_ipselect cp_sl01">
+
+					<select id="selectMonth" class="month" name="monthJump">
+
+
+
+					</select>
+
+				</div>
+
+
+			</div>
+
+
+			<div align="center">
+				<a class="btn-animation-02"><span>前月</span></a> <a
+					class="btn-animation-submit"><span>今月</span></a> <a
+					class="btn-animation-menu"><span>次月</span></a>
+
+			</div>
+
+		</div>
+		<div id="box"></div>
+
+
+		<div id="calendar" class="calendar-page" align="center"></div>
+
+
+		<div class="bottom" align="center">
+			<a onClick="location.href='/facilityreservation/list'"
+				class="btn-animation-menu"><span>戻る</span></a>
+		</div>
+	</div>
+
+	<div id="footer">
+		<p>© 2020 ginga software</p>
+	</div>
+
+	<!-- jsファイルの読み込み -->
+	<script type="text/javascript"
+		th:src="@{/js/facilityReservation/facilityReservationCalender.js}">
+
+	</script>
+
+
+</body>
+</html>

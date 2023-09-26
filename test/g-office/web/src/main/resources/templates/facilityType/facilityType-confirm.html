@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" media="all"
+	th:href="@{/css/main.css}">
+<link rel="stylesheet" type="text/css" media="all"
+	th:href="@{/css/confirm.css}">
+<link rel="stylesheet" type="text/css" media="all"
+	th:href="@{/css/button.css}">
+
+<title th:text="'施設種別'+${facilityTypeConfirm.btnName}+'内容確認'"></title>
+</head>
+<body>
+	<div
+		th:replace="util/fragments::header_block(|施設種別${facilityTypeConfirm.btnName}内容確認画面|)"></div>
+	<!-- 	<div class="completion-message"><div>施設情報管理</div></div> -->
+
+	<div class="completion-message">以下の内容でよろしいですか？</div>
+	<div id="container">
+
+	<form th:action="@{/facilitytype/complete}" name="confirm" method="POST"
+			th:object="${facilityTypeConfirm.facilityTypeForm}">
+
+			<table class="confirm">
+
+			<tr>
+					<th>種別名</th>
+					<td><input type="hidden" th:field="*{name}"> <span
+						th:text="*{name}"></span></td>
+				</tr>
+	</table>
+	<div class="bottom" align="center">
+				<button th:class="'btn-animation-' + ${facilityTypeConfirm.btnAction}"
+					id="confirm" th:name="${facilityTypeConfirm.btnAction}">
+					<span th:text=${facilityTypeConfirm.btnName}></span>
+				</button>
+				 <a class="btn-animation-menu"
+					th:attr="onClick='history.back()'">
+					<span>戻る</span>
+				</a>
+				</div>
+	</form>
+	</div>
+	<!-- container -->
+	<div th:replace="util/fragments::footer_block()"></div>
+</body>
+</html>

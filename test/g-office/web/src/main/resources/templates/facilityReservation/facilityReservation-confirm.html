@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" media="all"
+	th:href="@{/css/main.css}">
+<link rel="stylesheet" type="text/css" media="all"
+	th:href="@{/css/confirm.css}">
+<link rel="stylesheet" type="text/css" media="all"
+	th:href="@{/css/button.css}">
+
+<!-- jQueryの読み込み -->
+<script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+
+<!-- jQueryUiの読み込み -->
+<script th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<link rel="stylesheet"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+
+<title th:text="'施設'+${facilityReservationConfirmForm.btnName}+'内容確認'"></title>
+</head>
+<body>
+	<div th:replace="util/fragments::header_block(|予約情報管理|)"></div>
+	<div class="completion-message">以下の内容でよろしいですか？</div>
+	<div id="container">
+
+		<form th:action="@{/facilityreservation/complete}" name="confirm"
+			method="POST"
+			th:object="${facilityReservationConfirmForm.facilityReservationForm}">
+
+			<input type="hidden" id="startForm" th:field="*{startTime}"></input>
+			<input type="hidden" id="endForm" th:field="*{endTime}"></input> <input
+				type="hidden" id="facilityId"
+				th:value="${facilityReservationConfirmForm.facilityReservationForm.facilityForm.facilityId}"
+				th:field="${facilityReservationConfirmForm.facilityReservationForm.facilityForm.facilityId}">
+
+
+
+			<th:block
+				th:if="${facilityReservationConfirmForm.facilityReservationForm.reservationId != null}">
+				<input type="hidden" id="reservationId"
+					th:value="${facilityReservationConfirmForm.facilityReservationForm.reservationId}"
+					th:field="*{reservationId}">
+			</th:block>
+			<table class="confirm">
+
+				<tr>
+					<th>予約施設</th>
+					<td><input type="hidden" id="name"
+						th:object="${facilityReservationConfirmForm.facilityReservationFormList[0].facilityForm}"
+						th:text="*{name}" th:value="*{name}" th:field="*{name}"></td>
+				</tr>
+
+				<tr>
+					<th>予約日</th>
+					<td><input type="hidden" id="year"
+						th:object="${facilityReservationConfirmForm}" th:text="*{year}"
+						th:value="*{year}">年<input type="hidden" id="month"
+						th:object="${facilityReservationConfirmForm}" th:text="*{month}"
+						th:value="*{month}">月<input type="hidden" id="date"
+						th:object="${facilityReservationConfirmForm}" th:text="*{date}"
+						th:value="*{date}">日</td>
+				</tr>
+
+				<tr>
+					<th>予約時間</th>
+					<td><input type="hidden" name="startHour" id="startHour"
+						th:object="${facilityReservationConfirmForm}"
+						th:text="*{startHour}" th:value="*{startHour}">: <th:block
+							th:if="${facilityReservationConfirmForm.startSecond}==0">
+							<input type="hidden" name="startSecond" id="startSecond"
+								th:object="${facilityReservationConfirmForm}"
+								th:text="*{startSecond}" th:value="*{startSecond}">0</th:block> <th:block
+							th:if="${facilityReservationConfirmForm.startSecond}!=0">
+							<input type="hidden" name="startSecond" id="startSecond"
+								th:object="${facilityReservationConfirmForm}"
+								th:text="*{startSecond}" th:value="*{startSecond}">
+						</th:block> ~<input type="hidden" name="endHour" id="endHour"
+						th:object="${facilityReservationConfirmForm}" th:text="*{endHour}"
+						th:value="*{endHour}">: <th:block
+							th:if="${facilityReservationConfirmForm.endSecond}==0">
+							<input type="hidden" name="endSecond" id="endSecond"
+								th:object="${facilityReservationConfirmForm}"
+								th:text="*{endSecond}" th:value="*{endSecond}">0</th:block> <th:block
+							th:if="${facilityReservationConfirmForm.endSecond}!=0">
+							<input type="hidden" name="endSecond" id="endSecond"
+								th:object="${facilityReservationConfirmForm}"
+								th:text="*{endSecond}" th:value="*{endSecond}">
+						</th:block></td>
+				</tr>
+
+			</table>
+
+			<div class="bottom" align="center">
+				<button
+					th:class="'btn-animation-' + ${facilityReservationConfirmForm.btnAction}"
+					id="confirm-add"
+					th:name="${facilityReservationConfirmForm.btnAction}">
+					<span th:text=${facilityReservationConfirmForm.btnName}></span>
+				</button>
+				<a class="btn-animation-menu" th:attr="onClick='history.back()'">
+					<span>戻る</span>
+				</a>
+			</div>
+		</form>
+	</div>
+	<!-- container -->
+	<div th:replace="util/fragments::footer_block()"></div>
+
+
+	<!-- jsファイルの読み込み -->
+	<script type="text/javascript"
+		th:src="@{/js/facilityReservation/facilityReservationConfirm.js}">
+
+	</script>
+</body>
+</html>

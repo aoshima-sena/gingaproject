@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" media="all"
+	th:href="@{/css/main.css}">
+<link rel="stylesheet" type="text/css" media="all"
+	th:href="@{/css/add.css}">
+<link rel="stylesheet" type="text/css" media="all"
+	th:href="@{/css/button.css}">
+
+<!-- jQueryの読み込み -->
+<script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+
+<!-- jQueryUiの読み込み -->
+<script th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<link rel="stylesheet"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+
+<title>施設予約登録</title>
+</head>
+<body>
+	<div th:replace="util/fragments::header_block(|予約情報管理|)"></div>
+	<div id="container">
+
+		<form th:action="@{/facilityreservation/confirm}" method="POST"
+			onsubmit="return  cancelsubmit()"
+			th:object="${facilityReservationAddForm.facilityReservationForm}">
+
+			<div class="system-msg3" th:object="${facilityReservationAddForm}">
+				<div class="yeah">
+					<div
+						th:text="|・${facilityReservationAddForm.year}年 ${facilityReservationAddForm.month}月${facilityReservationAddForm.date}日|"></div>
+
+					<input type="hidden" id="year"
+						th:value="${facilityReservationAddForm.year}" th:field="*{year}">
+					<input type="hidden" id="month"
+						th:value="${facilityReservationAddForm.month}" th:field="*{month}">
+					<input type="hidden" id="date"
+						th:value="${facilityReservationAddForm.date}" th:field="*{date}">
+						<!-- すでにあるやつはリストから取り出せるけど新規作成したやつは無理ぽ↓ -->
+					<input type="hidden" id="aaa"
+						th:value="${facilityReservationAddForm.facilityReservationFormList[0].facilityForm.name}"
+						th:field="${facilityReservationAddForm.facilityReservationFormList[0].facilityForm.name}">
+					<input type="hidden"
+						th:value="${facilityReservationAddForm.facilityReservationFormList[0].facilityForm.facilityId}"
+						th:field="${facilityReservationAddForm.facilityReservationFormList[0].facilityForm.facilityId}">
+
+				</div>
+				<div class="cont">
+					<div class="system-msg3" th:object="${facilityReservationAddForm}">
+						<div class="left-column"
+							th:text="|・${facilityReservationAddForm.facilityReservationFormList[0].facilityForm.name}|"></div>
+
+					</div>
+
+
+
+					<script type="text/javascript">
+						var start = document.getElementById('aaa').value;
+						console.log(start);
+						//		start = start.textContent;
+						//		start = start.slice(1);
+
+						/* 		var name = "name =" + start +";";
+								console.log(name);
+								var dt = new Date('2023-03-16T17:30:59Z');
+								document.cookie=`meet=;expires=${dt.toUTCString}`;
+									document.cookie += name + `path=/facilityreservation/confirm`;
+
+						 	console.log(start); */
+						if (document.cookie.split(";")[0].split("=")[1] != null) {
+							document
+									.write("<div class='list'><ul class='detail-column'>");
+							for (var i = 0; i < document.cookie.split(";").length; i++) {
+								//		document.write("<input type='hidden' value="+ i + "th:field=*{startHour}");
+								/* document.write("<input type='hidden' value="+ i + "th:field=*{startSecond}");
+								document.write("<input type='hidden' value="+ i + "th:field=*{endHour}");
+								document.write("<input type='hidden' value="+ i + "th:field=*{endSecond}"); */
+								document.write("<li>"
+										+ document.cookie.split('; ')[i]
+												.split('=')[1] + "</li>	");
+
+							}
+							document.write("</ul></div>");
+						} else {
+							document.write("<div class='list'>" + "</div>");
+
+						}
+
+						//document.write(document.cookie)
+					</script>
+				</div>
+
+			</div>
+			<div class="system-msg" id="what"></div>
+
+
+
+			<div class="flex" align="center">
+
+				<div class="completion-message">
+					開始時間 <select class="cp_selecttab" name="startHour" id="startHour" ><script>
+						var text;
+						for (var i = 9; i <= 21; i++) {
+							if (i < 10) {
+								text = "0" + i;
+							} else {
+								text = i;
+							}
+
+							document.write('<option value="' + i +'">' + text
+									+ '</option>');
+
+						}
+					</script></select> <select class="cp_selecttab" name="startMin" id="startMin"><script>
+						var text;
+						for (var i = 0; i <= 45; i = i + 15) {
+							if (i < 10) {
+								text = "0" + i;
+							} else {
+								text = i;
+							}
+							document.write('<option value="' + i +'">' + text
+									+ '</option>');
+						}
+					</script></select>
+				</div>
+
+
+				<div class="completion-message">
+					終了時間 <select class="cp_selecttab" name="endHour" id="endHour"><script>
+						var text;
+						for (var i = 9; i <= 21; i++) {
+							if (i < 10) {
+								text = "0" + i;
+							} else {
+								text = i;
+							}
+
+							document.write('<option value="' + i +'">' + text
+									+ '</option>');
+						}
+					</script></select> <select class="cp_selecttab" name="endMin" id="endMin"><script>
+						var text;
+						for (var i = 0; i <= 45; i = i + 15) {
+							if (i < 10) {
+								text = "0" + i;
+							} else {
+								text = i;
+							}
+							document.write('<option value="' + i +'">' + text
+									+ '</option>');
+						}
+					</script></select>
+				</div>
+
+
+
+				<script>
+					console.log(document.cookie);
+				</script>
+
+				<div class="bottom" align="center">
+
+					<button class="btn-animation-add" type="submit" id="confirm"
+						name="add">
+						<span>登録</span>
+					</button>
+					<a class="btn-animation-menu" th:attr="onClick='history.back()'"><span>戻る</span></a>
+				</div>
+
+			</div>
+		</form>
+	</div>
+
+
+	<!-- container -->
+	<div th:replace="util/fragments::footer_block()"></div>
+
+	<!-- jsファイルの読み込み -->
+	<script type="text/javascript"
+		th:src="@{/js/facilityReservation/facilityReservationAdd.js}">
+
+	</script>
+</body>
+</html>

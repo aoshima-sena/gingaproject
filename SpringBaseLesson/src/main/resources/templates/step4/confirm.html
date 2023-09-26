@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Form Lesson</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+	<div id="contents">
+
+		<p class="question">selectタブを書いてみよう 血液型 A型、B型、AB型、O型</p>
+
+		<select>
+			<option th:each="item:${step4form.selectItem}" th:value="${item.key}"
+				th:inline="text"
+				th:selected="${step4form.selectedValue}==${item.key}">[[${item.value}]]</option>
+		</select>
+		<p>
+			選択した値は、
+			<th:block th:each="item:${step4form.selectItem}">
+				<th:block th:if="${step4form.selectedValue}==${item.key}">
+                [[${item.value}]]
+            </th:block>
+			</th:block>
+			です。
+		</p>
+
+		<p class="question">inputタグ textを書いてみよう</p>
+		<input type="text" th:value="${step4form.text}">
+		<p>入力した値は、[[${step4form.text}]] です。</p>
+
+		<p class="question">inputタグ passwordを書いてみよう</p>
+		<input type="password" th:value="${step4form.password}">
+		<p>入力した値は、[[${step4form.password}]] です。</p>
+
+		<p class="question">inputタグ radioを書いてみよう</p>
+		<span th:each="item:${step4form.radioItem}"> <input
+			th:field="${step4form.radioValue}" type="radio"
+			th:value="${item.key}"
+			th:checked="${step4form.radioValue}==${item.key}">[[${item.value}]]
+		</span>
+		<p>
+			選択した値は、
+			<th:block th:each="item:${step4form.radioItem}">
+				<th:block th:if="${step4form.radioValue}==${item.key}">
+                [[${item.value}]]
+            </th:block>
+			</th:block>
+			です。
+		</p>
+
+		<div class="question">
+			<p>inputタグ checkboxを書いてみよう</p>
+			<p>好きな食べ物は？ ※複数回答可</p>
+		</div>
+
+		<th:block th:each="item:${step4form.checkItem}">
+			<input th:field="${step4form.checkedValue}" type="checkbox"
+				th:value="${item.key}"
+				th:checked="${step4form.checkedValue}==${item.key}">[[${item.value}]]
+        </th:block>
+
+		<p>
+			選択した値は、
+			<th:block th:each="item:${step4form.checkItem}">
+				<th:block th:each="selectItem:${step4form.checkedValue}">
+					<th:block th:if="${selectItem}==${item.key}">
+                    [[${item.value}]]
+                </th:block>
+				</th:block>
+			</th:block>
+			です。
+		</p>
+	</div>
+	<!-- contents -->
+</body>
+</html>

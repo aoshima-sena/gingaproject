@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="jp.co.ginga.spring.base.step6.domain.repository.DepartmentRepository">
+	<resultMap id="departmentEmployeeMap"
+		type="jp.co.ginga.spring.base.step6.domain.entity.DepartmentEntity">
+		<id property="deptno" column="deptno" />
+		<result property="deptname" column="deptname" />
+		<result property="deptThumbnail" column="deptThumbnail" />
+		<collection property="employees"
+			ofType="jp.co.ginga.spring.base.step6.domain.entity.EmployeeEntity">
+			<id property="empNo" column="emp_no" />
+			<result property="empName" column="emp_name" />
+			<result property="birthday" column="birthday" />
+			<result property="deptno" column="dept_no" />
+		</collection>
+	</resultMap>
+
+	<select id="selectDeptEmp"
+		resultMap="departmentEmployeeMap">
+		select
+		d.deptno as deptno,
+		d.deptname as deptname,
+		d.deptThumbnail as deptThumbnail,
+		e.emp_no as emp_no,
+		e.emp_name as emp_name,
+		e.birthday as birthday,
+		e.dept_no as dept_no
+		from
+		department as d
+		left outer join
+		employee as e
+		on e.dept_no = d.deptno
+		where
+		deptno = #{deptno};
+	</select>
+</mapper>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>HTML Lesson</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+	<div id="contents">
+
+		<form th:action="@{/step4/submit}" method="post"
+			th:object="${step4form}">
+			<p class="question">aタグを書いてみよう リンク先は、https://www.ginga.co.jp/リンク名は、銀河ソフトウェア</p>
+			<a href="https://www.ginga.co.jp">銀河ソフトウェア</a>
+			<p class="question">selectタブを書いてみよう 血液型 A型、B型、AB型、O型</p>
+
+			<select th:field="*{selectedValue}">
+			<option th:each="item:${step4form.selectItem}"　th:value="${item.key}" th:inline="text">[[${item.value}]]</option>
+			</select>
+			<div class="question">
+				<p>tableタグを書いてみよう 列名は、名前、出身地</p>
+				<p>この段階では、罫線とかは意識しないで問題ありません</p>
+			</div>
+			<table>
+				<tr>
+					<th>名前</th>
+					<th>出身地</th>
+				</tr>
+				<tr>
+					<td>銀河 太郎</td>
+					<td>中目黒</td>
+				</tr>
+				<tr>
+					<td>銀河 花子</td>
+					<td>長野</td>
+				</tr>
+			</table>
+
+			<p class="question">inputタグ textを書いてみよう</p>
+			<input th:field="*{text}" type="text">
+			<p class="question">inputタグ passwordを書いてみよう</p>
+			<input th:field="*{password}" type="password">
+			<p class="question">inputタグ radioを書いてみよう</p>
+			<span th:each="item:${step4form.radioItem}"> <input
+				th:field="*{radioValue}" name="sex" type="radio"
+				th:value="${item.key}">[[${item.value}]]
+			</span>
+			<div class="question">
+				<p>inputタグ checkboxを書いてみよう</p>
+				<p>好きな食べ物は？ ※複数回答可</p>
+			</div>
+			<span th:each="item:${step4form.checkItem}"> <input
+				th:field="*{checkedValue}" name="food" type="checkbox"
+				th:value="${item.key}">[[${item.value}]]
+			</span>
+			<p class="question">inputタグ buttonを書いてみよう</p>
+			<input type="button" value="ボタン">
+			<p class="question">inputタグ submitを書いてみよう</p>
+			<input type="submit" value="送信ボタン">
+			<p class="question">inputタグ resetを書いてみよう</p>
+			<input type="reset" value="リセット">
+			<div class="question">
+				<p>inputタグ hiddenを書いてみよう 隠しメッセージは、画面には表示されない</p>
+				<p>確認する際は、画面上で右クリックをし、ページのソースを表示を選択し確認してください</p>
+			</div>
+			<input type="hidden" value="画面には表示されない">
+
+			<p class="question">他にもいろいろあるので時間があるときに確認してください</p>
+			<a href="http://www.htmq.com/html5/input.shtml">参考サイト</a>
+		</form>
+	</div>
+	<!-- contents -->
+</body>
+</html>

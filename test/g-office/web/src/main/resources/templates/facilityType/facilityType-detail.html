@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" media="all"
+	th:href="@{/css/main.css}">
+<link rel="stylesheet" type="text/css" media="all"
+	th:href="@{/css/detail.css}">
+<link rel="stylesheet" type="text/css" media="all"
+	th:href="@{/css/button.css}">
+
+<!-- jQueryの読み込み -->
+<script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+
+<!-- jQueryUiの読み込み -->
+<script th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<link rel="stylesheet"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+<title>施設種別詳細</title>
+</head>
+<body>
+
+
+
+
+	<div th:replace="util/fragments::header_block(|施設種別更新画面|)"></div>
+
+
+	<div id="container">
+		<form th:action="@{/facilitytype/confirm}" name="update" method="POST"
+			th:object="${facilityTypeDetailForm}">
+
+			<div class="system-msg">
+				<span th:errors="${facilityTypeDetailForm.sysMsg}">システムメッセージ</span>
+			</div>
+
+			<table class="facility-detail">
+
+				<tr>
+					<th>施設名<span class="system-msg"></span></th>
+					<td><span th:if="${#fields.hasErrors('facilityTypeForm.name')}"
+						th:errors="*{facilityTypeForm.name}" class="system-msg">haserror</span>
+					<input type="text" th:field="*{facilityTypeForm.name}"></td>
+				</tr>
+
+			</table>
+
+			<div class="bottom" align="center">
+				<button type="submit" class="btn-animation-update" id="confirm"
+					name="update">
+					<span>更新</span>
+				</button>
+				<button type="submit" class="btn-animation-delete" id="confirm"
+					name="delete">
+					<span>削除</span>
+				</button>
+				<a class="btn-animation-menu"
+					onClick="location.href='/facilityType/list'"><span>戻る</span></a>
+
+			</div>
+
+		</form>
+
+	</div>
+	<!-- container -->
+	<div th:replace="util/fragments::footer_block()"></div>
+
+	<!-- jsファイルの読み込み -->
+	<script type="text/javascript" th:src="@{/js/user/userRetype.js}"></script>
+
+
+</body>
+</html>

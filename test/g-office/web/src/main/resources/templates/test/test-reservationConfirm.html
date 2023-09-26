@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" media="all"
+	th:href="@{/css/main.css}">
+<link rel="stylesheet" type="text/css" media="all"
+	th:href="@{/css/confirm.css}">
+<link rel="stylesheet" type="text/css" media="all"
+	th:href="@{/css/button.css}">
+
+<!-- jQueryの読み込み -->
+<script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+
+<!-- jQueryUiの読み込み -->
+<script th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<link rel="stylesheet"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+
+<title th:text="'施設'+${facilityReservationConfirmForm.btnName}+'内容確認'"></title>
+</head>
+<body>
+	<div th:replace="util/fragments::header_block(|予約情報管理|)"></div>
+	<div class="completion-message">以下の内容でよろしいですか？</div>
+	<div id="container">
+
+		<form th:action="@{/testfacilityreservation/complete}" name="confirm"
+			method="POST"
+			th:object="${facilityReservationConfirmForm.facilityReservationForm}">
+			<input type="hidden" id="startForm" th:field="*{startTime}"></input>
+			<input type="hidden" id="endForm" th:field="*{endTime}"></input> <input
+				type="hidden" id="facilityId"
+				th:value="${facilityReservationConfirmForm.facilityReservationForm.facilityForm.facilityId}"
+				th:field="${facilityReservationConfirmForm.facilityReservationForm.facilityForm.facilityId}">
+			<th:block
+				th:if="${facilityReservationConfirmForm.facilityReservationForm.reservationId != null}">
+				<input type="hidden" id="reservationId"
+					th:value="${facilityReservationConfirmForm.facilityReservationForm.reservationId}"
+					th:field="*{reservationId}">
+			</th:block>
+			<table class="confirm">
+
+
+				<tr>
+					<th>予約施設</th>
+					<td><th:block
+							th:if="${facilityReservationConfirmForm.facilityReservationFormList.size !=0}">
+							<input type="hidden" id="name"
+								th:text="${facilityReservationConfirmForm.facilityReservationFormList[0].facilityForm.name}"
+								th:value="${facilityReservationConfirmForm.facilityReservationFormList[0].facilityForm.name}"
+								th:field="${facilityReservationConfirmForm.facilityReservationFormList[0].facilityForm.name}">
+							<input type="hidden" id="facilityId"
+
+								th:value="${facilityReservationConfirmForm.facilityReservationFormList[0].facilityForm.facilityId}"
+								th:field="${facilityReservationConfirmForm.facilityReservationFormList[0].facilityForm.facilityId}">
+
+						</th:block> <th:block
+							th:if="${facilityReservationConfirmForm.facilityReservationFormList.size==0}">
+							<input type="hidden" id="name"
+								th:text="${facilityReservationConfirmForm.facilityReservationForm.facilityForm.name}"
+								th:value="${facilityReservationConfirmForm.facilityReservationForm.facilityForm.name}"
+								th:field="${facilityReservationConfirmForm.facilityReservationForm.facilityForm.name}">
+								<input type="hidden" id="facilityId"
+
+								th:value="${facilityReservationConfirmForm.facilityReservationForm.facilityForm.facilityId}"
+								th:field="${facilityReservationConfirmForm.facilityReservationForm.facilityForm.facilityId}">
+
+
+						</th:block></td>
+				</tr>
+				<tr>
+					<th>予約日</th>
+					<td><input type="hidden" id="year"
+						th:value="${facilityReservationConfirmForm.calendarMonthForm.startYear}"
+						th:text="${facilityReservationConfirmForm.calendarMonthForm.startYear}">年<input
+						type="hidden" id="month"
+						th:value="${facilityReservationConfirmForm.calendarMonthForm.startMonth}"
+						th:text="${facilityReservationConfirmForm.calendarMonthForm.startMonth}">月<input
+						type="hidden" id="date"
+						th:value="${facilityReservationConfirmForm.calendarMonthForm.startDate}"
+						th:text="${facilityReservationConfirmForm.calendarMonthForm.startDate}">日</td>
+				</tr>
+				<tr>
+					<th>予約時間</th>
+					<td><input type="hidden" id="startHour"
+						th:value="${facilityReservationConfirmForm.startHour}"
+						th:text="${facilityReservationConfirmForm.startHour}">:<th:block
+							th:if="${facilityReservationConfirmForm.startMin == 0}">0</th:block><input
+						type="hidden" id="startMin"
+						th:value="${facilityReservationConfirmForm.startMin}"
+						th:text="${facilityReservationConfirmForm.startMin}">~<input
+						type="hidden" id="endHour"
+						th:value="${facilityReservationConfirmForm.endHour}"
+						th:text="${facilityReservationConfirmForm.endHour}">:<th:block
+							th:if="${facilityReservationConfirmForm.endMin == 0}">0</th:block><input
+						type="hidden" id="endMin"
+						th:value="${facilityReservationConfirmForm.endMin}"
+						th:text="${facilityReservationConfirmForm.endMin}"></td>
+				</tr>
+			</table>
+
+			<div class="bottom" align="center">
+				<button
+					th:class="'btn-animation-' + ${facilityReservationConfirmForm.btnAction}"
+					id="confirm-add"
+					th:name="${facilityReservationConfirmForm.btnAction}">
+					<span th:text="${ facilityReservationConfirmForm.btnName}"></span>
+				</button>
+				<a class="btn-animation-menu" th:attr="onClick='history.back()'">
+					<span>戻る</span>
+				</a>
+			</div>
+		</form>
+	</div>
+
+	<!-- container -->
+	<div th:replace="util/fragments::footer_block()"></div>
+
+	<!-- jsファイルの読み込み -->
+	<script type="text/javascript"
+		th:src="@{/js/test/testfacilityReservationConfirm.js}">
+
+	</script>
+</body>
+</html>

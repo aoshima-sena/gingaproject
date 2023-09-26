@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Department List</title>
+</head>
+<body>
+	<div align="center">
+
+		<h1>部署一覧</h1>
+
+		<table>
+			<tr>
+				<td><input type="button" value="新規追加"
+					onClick="location.href='./add'" /></td>
+			</tr>
+		</table>
+
+		<table border="1">
+			<tr>
+				<th>ID</th>
+				<th>部署名</th>
+				<th>編集ボタン</th>
+				<th>削除ボタン</th>
+			</tr>
+
+			<tr th:each="list : ${departmentList}">
+
+				<td th:text="${list.deptno}">1</td>
+
+				<td><a th:text="${list.deptname}"
+					th:href="@{detail/{deptno}(deptno=${list.deptno})}">総務部</a></td>
+				<td><a th:href="@{edit/{deptno}(deptno=${list.deptno})}">編集</a></td>
+
+				<td>
+					<form th:action="@{/step6/delete/{deptno}(deptno=${list.deptno})}"
+						method="post">
+
+						<button type="submit" onclick='return confirm("よろしいですか？");'>削除</button>
+					</form>
+				</td>
+			</tr>
+		</table>
+		<!-- ページネーション -->
+		<div id="pagination">
+			<a th:if="${page > 1}"
+				th:href="@{./list?page={page}(page=${page-1})}" th:value="${page-1}"
+				th:text="Prev">Prev</a>
+
+			<th:block th:each="p,p : ${#numbers.sequence(1,maxPages)}">
+				<span th:if="${page == p.count}" th:text="${p.count}">0</span>
+				<a th:unless="${page == p.count}"
+					th:href=@{./list?page={page}(page=${p.count})}
+					th:value="${p.count}" th:text="${p.count}">0</a>
+			</th:block>
+
+			<a th:if="${page + 1 <= maxPages}"
+				th:href="@{./list?page={page}(page=${page+1})}" th:value="${page+1}"
+				th:text="Next">Next</a>
+		</div>
+	</div>
+	<div class="footer" align="center">フッターです</div>
+</body>
+</html>

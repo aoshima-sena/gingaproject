@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" media="all"
+	th:href="@{/css/main.css}">
+<link rel="stylesheet" type="text/css" media="all"
+	th:href="@{/css/detail.css}">
+<link rel="stylesheet" type="text/css" media="all"
+	th:href="@{/css/button.css}">
+
+<!-- jQueryの読み込み -->
+<script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+
+<!-- jQueryUiの読み込み -->
+<script th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<link rel="stylesheet"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+
+<title>施設予約詳細</title>
+</head>
+<body>
+
+	<div th:replace="util/fragments::header_block(|予約情報管理|)"></div>
+	<div id="container">
+		<div align="center">
+			<div class="test">test</div>
+			<form th:action="@{/testfacilityreservation/confirm}" method="POST"
+				th:object="${facilityReservationDetailForm.facilityReservationForm}">
+				<!-- 横並びにするCSS -->
+				<div class="test-message1">
+					<!-- 左側のリストの位置 -->
+					<div class="detailPositionTest">
+						<div
+							th:text="|・${facilityReservationDetailForm.calendarMonthForm.startYear}年${facilityReservationDetailForm.calendarMonthForm.startMonth}月${facilityReservationDetailForm.calendarMonthForm.startDate}日|"></div>
+						<input type="hidden" id="startYear"
+							th:value="${facilityReservationDetailForm.calendarMonthForm.startYear}"
+							th:field="${facilityReservationDetailForm.calendarMonthForm.startYear}">
+						<input type="hidden" id="startMonth"
+							th:value="${facilityReservationDetailForm.calendarMonthForm.startMonth}"
+							th:field="${facilityReservationDetailForm.calendarMonthForm.startMonth}">
+						<input type="hidden" id="startDate"
+							th:value="${facilityReservationDetailForm.calendarMonthForm.startDate}"
+							th:field="${facilityReservationDetailForm.calendarMonthForm.startDate}">
+
+						<div
+							th:text="|・${facilityReservationDetailForm.facilityReservationForm.facilityForm.name}|"></div>
+						<input type="hidden"
+							th:value="${facilityReservationDetailForm.facilityReservationForm.facilityForm.name}"
+							th:field="${facilityReservationDetailForm.facilityReservationForm.facilityForm.name}">
+							<input type="hidden"
+							th:value="${facilityReservationDetailForm.facilityReservationForm.facilityForm.facilityId}"
+							th:field="${facilityReservationDetailForm.facilityReservationForm.facilityForm.facilityId}">
+							<input type="hidden"
+							th:value="${facilityReservationDetailForm.facilityReservationForm.reservationId}"
+							th:field="${facilityReservationDetailForm.facilityReservationForm.reservationId}">
+					</div>
+					<div class="list">
+						<!-- 右側のリストの位置 -->
+						<ul class="detailTest">
+							<li
+								th:text="|${facilityReservationDetailForm.calendarMonthForm.startTime}~${facilityReservationDetailForm.calendarMonthForm.endTime}|"></li>
+						</ul>
+
+					</div>
+					<input id="startTime" type="hidden"
+						th:value="${facilityReservationDetailForm.calendarMonthForm.startTime}">
+					<input id="endTime" type="hidden"
+						th:value="${facilityReservationDetailForm.calendarMonthForm.endTime}">
+						<input id="reservationId" type="hidden" th:value="${facilityReservationDetailForm.facilityReservationForm.reservationId}">
+				</div>
+
+				<div class="system-msg" id="error"></div>
+
+
+				<div class="conplecation-message">
+					<select class="cp_selecttab" name="startHour" id="startHour">
+
+					</select> <select class="cp_selecttab" name="startMin" id="startMin">
+
+					</select>
+				</div>
+
+				<div class="complecation-message">
+					<select class="cp_selecttab" name="endHour" id="endHour">
+
+					</select> <select class="cp_selecttab" name="endMin" id="endMin">
+
+					</select>
+				</div>
+
+
+				<div class="bottom" align="center">
+					<button type="submit" class="btn-animation-update" id="confirm"
+						name="update">
+						<span>更新</span>
+					</button>
+					<button type="submit" class="btn-animation-delete" id="confirm"
+						name="delete">
+						<span>削除</span>
+					</button>
+
+				</div>
+				<div class="bottom" align="center">
+					<a class="btn-animation-menu" th:attr="onClick='history.back()'"><span>戻る</span></a>
+				</div>
+
+
+			</form>
+		</div>
+	</div>
+	<!-- container -->
+	<div th:replace="util/fragments::footer_block()"></div>
+
+	<!-- jsファイルの読み込み -->
+	<script type="text/javascript"
+		th:src="@{/js/test/testfacilityReservationDetail.js}">
+
+	</script>
+</body>
+</html>

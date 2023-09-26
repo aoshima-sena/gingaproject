@@ -1,0 +1,8 @@
+<dataset>
+<m_facility_type name= "会議室1" facility_type_id="1" fg_delete = "0"/>
+<m_facility_type name="会議室2" facility_type_id="2" fg_delete = "0" />
+<m_facility_type name="会議室3" facility_type_id="3" fg_delete = "0"/>
+</dataset>
+
+
+<!-- insert文 -->

@@ -1,0 +1,86 @@
+@charset "UTF-8";
+
+body {
+	font-family: 'メイリオ', 'Meiryo', sans-serif;
+}
+
+#contents {
+	width: 80%;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+p.question {
+	font-size: 20px;
+	background-color: blue;
+	color: white;
+	height: 30px;
+}
+
+div.question {
+	font-size: 20px;
+	background-color: blue;
+	color: white;
+	height: 80px;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	color: red;
+	font-size: 30px;
+	transition: .2s;
+}
+
+select {
+	font-size: 40px;
+}
+
+table {
+	width: 30%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+}
+
+table, td, th {
+	border-collapse: collapse;
+	border: 1px solid #333;
+}
+
+th {
+	background-color: black;
+	color: white;
+}
+
+input {
+	width: 500px;
+}
+
+input[type="radio"] {
+	width: auto;
+}
+
+input[type="checkbox"] {
+	width: auto;
+}
+
+input[type="submit"] {
+	background-color: green;
+	font-weight: bold;
+	font-size: 20px;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	border-radius:20px;
+	border: none;
+	outline: none;
+
+}
+
+input[type="submit"]:hover {
+	background-color: red;
+	color: white;
+}

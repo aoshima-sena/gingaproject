@@ -1,0 +1,4 @@
+<dataset>
+	<m_facility facility_id="1" name="会議室1" capacity="10"  facility_type_id="1"  />
+	<m_facility_type name="会議室1" facility_type_id="1" />
+</dataset>

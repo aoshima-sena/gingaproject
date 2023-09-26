@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Department List</title>
+</head>
+<body>
+	<div align="center">
+
+		<h1>部署編集</h1>
+
+		<form th:action="@{${department.deptno}}" th:object="${department}"
+			method="post">
+
+			<table border="1">
+				<tr>
+					<th>部署番号</th>
+					<td th:text="${deptno}">（自動採番されます）</td>
+				</tr>
+				<tr>
+					<th>部署名</th>
+					<td><input type="text" name="deptname" th:field="*{deptname}" /></td>
+				</tr>
+			</table>
+
+			<input type="submit" value="送信">
+
+		</form>
+
+		<table>
+			<tr>
+				<td><a href="/step6/list">部署一覧</a></td>
+			</tr>
+		</table>
+
+		<div id="footer"></div>
+	</div>
+</body>
+</html>

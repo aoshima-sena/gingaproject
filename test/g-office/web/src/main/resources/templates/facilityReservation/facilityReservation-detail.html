@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" media="all"
+	th:href="@{/css/main.css}">
+<link rel="stylesheet" type="text/css" media="all"
+	th:href="@{/css/detail.css}">
+<link rel="stylesheet" type="text/css" media="all"
+	th:href="@{/css/button.css}">
+
+<!-- jQueryの読み込み -->
+<script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+
+<!-- jQueryUiの読み込み -->
+<script th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<link rel="stylesheet"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+
+<title>施設予約詳細</title>
+</head>
+<body>
+
+	<div th:replace="util/fragments::header_block(|予約情報管理|)"></div>
+	<div id="container">
+		<form th:action="@{/facilityreservation/confirm}" method="POST"
+			th:object="${facilityReservationDetailForm.facilityReservationForm}">
+
+			<!--  -->
+			<input id="start" type="hidden"
+				th:value="${facilityReservationDetailForm.facilityReservationForm.startTime}"
+				th:field="*{startTime}"> <input id="end" type="hidden"
+				th:value="${facilityReservationDetailForm.facilityReservationForm.endTime}"
+				th:field="*{endTime}"> <input type="hidden"
+				th:value="${facilityReservationDetailForm.facilityReservationForm.facilityForm.facilityId}"
+				th:field="*{facilityForm.facilityId}"> <input
+				id="reservationId" type="hidden"
+				th:value="${facilityReservationDetailForm.facilityReservationForm.reservationId}">
+			<input class="startTimeList" type="hidden"
+				th:each="facilityReservation, status: ${facilityReservationDetailForm}"
+				th:value="${facilityReservation.facilityReservationForm.startTime}">
+			<input id="endTimeList" type="hidden"
+				th:each="facilityReservation : ${facilityReservationDetailForm}"
+				th:value="${facilityReservation.facilityReservationForm.endTime}">
+			<input id="reservationId" type="hidden"
+				th:value="${facilityReservationDetailForm.facilityReservationForm.reservationId}"
+				th:field="*{reservationId}">
+			<div id="addData"></div>
+			<div class="system-msg3">
+				<div class="yeah">
+					<script th:inline="javascript">
+						var start = document.getElementById('start');
+						start = start.value;
+						const date = new Date(start);
+						var year = date.getFullYear();
+						var month = date.getMonth() + 1;
+						var newDate = date.getDate();
+						var startHour = date.getHours();
+						var startMin = date.getMinutes();
+
+						console.log(date);
+						console.log(startHour);
+						console.log(startMin + "0");
+						document.write("<div>" + "・" + year + "年" + month + "月"
+								+ newDate + "日" + "</div>");
+						document
+								.write("<input type='hidden' value=" + year
+							+ " name='year' id='year'>");
+						document
+								.write("<input type='hidden' value=" + month
+							+ " name='month' id='month'>");
+						document
+								.write("<input type='hidden' value=" + newDate
+							+ " name='date' id='date'>");
+					</script>
+				</div>
+				<div class="cont">
+					<div class="system-msg3"
+						th:object="${facilityReservationDetailForm}">
+
+						<div class="left-column"
+							th:text="|・${facilityReservationDetailForm.facilityReservationForm.facilityForm.name}|"></div>
+
+					</div>
+					<div class="list">
+						<ul class="detail-column">
+							<script>
+								var start = document.getElementById('start');
+								start = start.value;
+								const date2 = new Date(start);
+								var startHour = date2.getHours();
+								var startMin = date2.getMinutes();
+								var end = document.getElementById('end');
+								end = end.value;
+								const date3 = new Date(end);
+								var endHour = date3.getHours();
+								var endMin = date3.getMinutes();
+
+								if (startMin < 10) {
+									startMin += "0";
+								}
+								if (endMin < 10) {
+									endMin += "0"
+								}
+
+								var startTmp = startHour + ":" + startMin;
+								var endTmp = endHour + ":" + endMin;
+								document.write("<li>" + startTmp + "~" + endTmp
+										+ "</li>");
+							</script>
+						</ul>
+					</div>
+
+				</div>
+
+			</div>
+
+
+			<div class="system-msg" id="error"></div>
+
+			<div class="flex" align="center">
+				<div class="completion-message">
+					開始時間<select class="cp_selecttab" name="startHour" id="startHour">
+						<script>
+							var text;
+							console.log(startHour);
+							for (var i = 9; i <= 21; i++) {
+
+								if (i < 10) {
+									text = "0" + i;
+								} else {
+									text = i;
+								}
+								if (i == startHour) {
+									document
+											.write("<option value = " + i +" selected>"
+													+ text + "</option>");//出てこん
+
+								} else {
+									document.write("<option value =" + i + ">"
+											+ text + "</option>");
+								}
+							}
+						</script>
+					</select> <select class="cp_selecttab" name="startMin" id="startMin">
+						<script>
+							var text;
+
+							for (var i = 0; i <= 45; i = i + 15) {
+								if (i < 10) {
+									text = "0" + i;
+								} else {
+									text = i;
+								}
+								if (text == startMin) {
+									document
+											.write("<option value =" + i + " selected>"
+													+ startMin + "</option>")
+								} else {
+									document.write("<option value =" + i + ">"
+											+ i + "</option>");
+								}
+							}
+						</script>
+					</select>
+				</div>
+
+				<div class="completion-message">
+					終了時間<select class="cp_selecttab" name="endHour" id="endHour">
+						<script>
+							var text;
+
+							for (var i = 9; i <= 21; i++) {
+
+								if (i < 10) {
+									text = "0" + i;
+								} else {
+									text = i;
+								}
+								if (i == endHour) {
+									document
+											.write("<option value = " + i +" selected>"
+													+ endHour + "</option>");//出てこん
+
+								} else {
+									document.write("<option value =" + i + ">"
+											+ text + "</option>");
+								}
+							}
+						</script>
+					</select> <select class="cp_selecttab" name="endMin" id="endMin">
+						<script>
+							var text;
+
+							for (var i = 0; i <= 45; i = i + 15) {
+								if (i < 10) {
+									text = "0" + i;
+								} else {
+									text = i;
+								}
+								if (text == endMin) {
+									document
+											.write("<option value =" + i +" selected>"
+													+ endMin + "</option>")
+								} else {
+									document.write("<option value =" + i + ">"
+											+ text + "</option>");
+								}
+							}
+						</script>
+					</select>
+
+				</div>
+
+
+
+				<div class="bottom" align="center">
+					<button type="submit" class="btn-animation-update" id="confirm"
+						name="update">
+						<span>更新</span>
+					</button>
+					<button type="submit" class="btn-animation-delete" id="confirm"
+						name="delete">
+						<span>削除</span>
+					</button>
+
+				</div>
+				<div class="bottom" align="center">
+					<a class="btn-animation-menu" th:attr="onClick='history.back()'"><span>戻る</span></a>
+				</div>
+			</div>
+		</form>
+	</div>
+	<!-- container -->
+	<div th:replace="util/fragments::footer_block()"></div>
+
+	<!-- jsファイルの読み込み -->
+	<script type="text/javascript"
+		th:src="@{/js/facilityReservation/facilityReservationDetail.js}">
+
+	</script>
+</body>
+</html>

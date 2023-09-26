@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Department List</title>
+</head>
+<body>
+    <div align="center">
+
+        <h1>部署詳細</h1>
+
+        <table border="1">
+            <tr>
+                <th>ID</th>
+                <td th:text="${department.deptno}">1</td>
+            </tr>
+            <tr>
+                <th>部署名</th>
+                <td th:text="${department.deptname}">総務部</td>
+            </tr>
+        </table>
+
+        <th:block th:if="${department.deptThumbnail != null}">
+            <img
+                th:src="@{/static/images/{file}(file=${department.deptThumbnail})}"
+                width="400" class="img-thumbnail">
+        </th:block>
+
+
+        <th:block th:if="${department.employees.size != 0}">
+            <h2>社員一覧</h2>
+            <table border="1">
+                <tr>
+                    <th>社員番号</th>
+                    <th>社員名</th>
+                    <th>誕生日</th>
+                </tr>
+                <tr th:each="emp : ${department.employees}">
+                    <td th:text="${emp.empNo}">0001</td>
+                    <td th:text="${emp.empName}">テスト</td>
+                    <td th:text="${#dates.format(emp.birthday,'yyyy/MM/dd')}">2021/01/01</td>
+                </tr>
+            </table>
+        </th:block>
+
+        <table>
+            <tr>
+                <td><a href="/step6/list">部署一覧</a></td>
+            </tr>
+        </table>
+
+        <div id="footer"></div>
+    </div>
+</body>
+</html>

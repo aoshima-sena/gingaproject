@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="jp.co.ginga.infra.repository.facility.FacilityRepository">
+	<resultMap
+		type="jp.co.ginga.infra.repository.facility.FacilityEntity"
+		id="facility">
+
+		<id property="facilityId" column="facility_id" />
+		<result property="name" column="name" />
+		<result property="capacity" column="capacity" />
+		<result property="insertDate" column="insert_date" />
+		<result property="updateDate" column="update_date" />
+
+		<association property="facilityTypeEntity"
+			javaType="jp.co.ginga.infra.repository.facilitytype.FacilityTypeEntity">
+			<id property="facilityTypeId" column="facility_type_id" />
+			<result property="name" column="type_name" />
+		</association>
+		<association property="insertUserEntity"
+			javaType="jp.co.ginga.infra.repository.user.UserEntity">
+			<id property="userId" column="user_id" />
+		</association>
+		<association property="updateUserEntity"
+			javaType="jp.co.ginga.infra.repository.user.UserEntity">
+			<id property="userId" column="update_user_id" />
+		</association>
+
+	</resultMap>
+
+	<select id="findAll" resultMap="facility">
+		select
+		facility_id
+		,
+		m_facility.name
+		,
+		capacity
+		,
+		m_facility_type.facility_type_id
+		,
+
+		m_facility_type.name
+		as
+		type_name
+		from
+		m_facility
+		left join
+		m_facility_type
+		on
+		m_facility.facility_type_id=m_facility_type.facility_type_id
+		order by
+		facility_id asc;
+
+
+	</select>
+
+	<select id="findByFacilityId" resultMap="facility">
+		select
+		facility_id
+		,name
+		,capacity
+		,facility_type_id
+		<!-- ,insert_date ,user_id ,update_date ,update_user_id -->
+		from
+		m_facility
+		where
+		facility_id=
+		#{facilityId};
+	</select>
+
+	<select id="findByFacilityTypeId" resultMap="facility">
+		select
+		facility_id
+		,name
+		,capacity
+		,facility_type_id
+		from
+		m_facility
+		where
+		facility_type_id=#{facilityTypeEntity.facilityTypeId};
+
+	</select>
+
+	<select id="findByName" resultMap="facility">
+		select
+		name
+		from
+		m_facility
+		where
+		name=#{name};
+	</select>
+
+	<insert id="insert">
+		insert into m_facility (
+		<if test="facilityId != 0">
+			facility_id,
+		</if>
+		name
+		,capacity
+		,facility_type_id
+		,insert_date
+		,user_id
+		) values (
+		<if test="facilityId != 0">
+			#{facilityId},
+		</if>
+		#{name}
+		,#{capacity}
+		,#{facilityTypeEntity.facilityTypeId}
+		<if test="insertDate !=null">
+			,#{insertDate}
+		</if>
+		<if test="insertDate == null">
+			,NOW()
+		</if>
+		,#{insertUserEntity.userId}
+		);
+
+
+	</insert>
+
+	<update id="update">
+		update
+		m_facility
+		set
+		name=#{name},
+
+		capacity=#{capacity},
+		<if test="facilityTypeEntity.facilityTypeId != null">
+			facility_type_id=#{facilityTypeEntity.facilityTypeId},
+		</if>
+		update_date=NOW(),
+
+		update_user_id=#{updateUserEntity.userId}
+
+		where
+
+		facility_id=#{facilityId};
+	</update>
+
+	<delete id="delete">
+		delete
+		from
+		m_facility
+		where
+		facility_id=#{facilityEntity.facilityId};
+	</delete>
+
+
+</mapper>
+

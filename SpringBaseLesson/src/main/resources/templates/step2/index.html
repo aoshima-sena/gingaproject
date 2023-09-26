@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ステップ2</title>
+</head>
+<body>
+
+    <p>Get送信・Post送信の違いを理解しよう</p>
+    <form action="/get" method="get">
+        <input type="text" name="paramGet">
+        <input type="submit" value="Get送信">
+    </form>
+
+    <form action="/post" method="post">
+        <input type="text" name="paramPost">
+        <input type="submit" value="Post送信">
+    </form>
+
+</body>
+</html>

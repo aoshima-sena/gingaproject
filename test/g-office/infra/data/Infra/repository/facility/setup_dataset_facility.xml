@@ -1,0 +1,8 @@
+<dataset>
+	<m_facility facility_id="1" name="会議室1" capacity="10" facility_type_id="1" />
+	<m_facility facility_id="2" name="会議室2" capacity="20" facility_type_id="2"/>
+	<m_facility facility_id="3" name="会議室3" capacity="30" facility_type_id="3"/>
+	<m_facility_type name="会議室1" facility_type_id="1" />
+	<m_facility_type name="会議室2" facility_type_id="2" />
+	<m_facility_type name="会議室3" facility_type_id="3" />
+</dataset>

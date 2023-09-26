@@ -1,0 +1,223 @@
+@charset "UTF-8";
+
+.calendar-header {
+	text-align: center;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 0px;
+}
+
+.calendar-header a {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.calendar-header p {
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+.calendar-header p input {
+	margin-left: 100px;
+}
+
+.calendar-page {
+	text-align: center;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+.calendar-page table {
+	table-layout: fixed;
+	width: 900px;
+	margin: 0 auto;
+	border-collapse: collapse;
+	border-spacing: 10px;
+}
+
+.calendar-page table td {
+	vertical-align: top;
+	position: relative;
+	text-align: center;
+
+	padding-bottom: 45px;
+	border: 1px solid #c0c0c0;
+
+}
+
+.calendar-page table td:hover {
+	vertical-align: top;
+	text-align: center;
+	position: relative;
+	background-color: #d4faff;
+}
+
+.calendar-page table th {
+	background-color: #f6f6f6;
+	color: black;
+	border: 1px solid #c0c0c0;
+}
+
+.calendar-page table tr th.sunday {
+	background-color: #f09199;
+	color: red;
+	height: 60px;
+}
+
+.calendar-page table tr td.sunday {
+	background-color: #fbe1e2;
+	height: 150px;
+}
+
+.calendar-page table  tr td.sunday:hover {
+	background-color: #d4faff;
+	height: 150px;
+}
+
+.calendar-page table  tr th.saturday {
+	background-color: #90b0f0;
+	color: blue;
+	height: 60px;
+}
+
+.calendar-page table  tr td.saturday {
+	background-color: #d2dff9;
+	height: 150px;
+}
+
+.calendar-page table  tr td.saturday:hover {
+	background-color: #d4faff;
+	height: 150px;
+}
+
+.another-month {
+	background-color: #dcdcdc;
+}
+
+.date-data {
+	vertical-align: top;
+	text-align: center;
+}
+
+.date {
+	font-weight: bold;
+}
+
+.add {
+	display: inline-block;
+	text-decoration: none;
+	background: #61b2b2;
+	color: #ffffff;
+	width: 34px;
+	height: 34px;
+	line-height: 10px;
+	border-radius: 50%;
+	text-align: center;
+	overflow: hidden;
+	transition: .2s;
+
+
+}
+
+.add:hover {
+	background: #f0574f;
+	font-weight: bold;
+}
+
+.add2 {
+	display: inline-block;
+	text-decoration: none;
+	background: #61b2b2;
+	color: #ffffff;
+	width: 34px;
+	height: 34px;
+	line-height: 10px;
+	border-radius: 50%;
+	text-align: center;
+	overflow: hidden;
+	transition: .2s;
+}
+
+.addthree {
+	color:#0000ff;
+}
+
+.detail {
+	text-align: center;
+	width: 50%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;
+}
+
+.label-big {
+	font-size: 30px;
+	vertical-align: top;
+}
+
+.label-mid {
+	font-size: 24px;
+}
+
+.info {
+	font-size: 18px;
+}
+
+.detail ol {
+	text-align: center;
+	width: 30%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 50px;
+}
+
+.detail select {
+	height: 30px;
+	width: 50px;
+	margin-left: 30px;
+	margin-bottom: 30px;
+	vertical-align: top;
+	font-size: 24px;
+	border: 1px;
+}
+
+.element {
+	display: inline-block;
+	font-size: 16px;
+}
+
+.r-information {
+	font-size: 0;
+}
+
+div p {
+	margin: auto;
+	vertical-align: bottom;
+}
+
+.flex {
+	display: flex;
+	width: 310px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+ol {
+	margin: auto;
+}
+
+.element p {
+	text-align: left;
+}
+
+table p {
+	position: absolute;
+	bottom: 0%;
+	left: 0px;
+	right: 0px;
+	margin: auto;
+}
